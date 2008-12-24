@@ -397,11 +397,16 @@ public class YsFileUtils {
     public static byte[] readFileOrZipAsBytes(File directoryOrArchive, String relativePath)
             throws IOException {
         InputStream in = openFileOrZip(directoryOrArchive, relativePath);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        transfer(in, baos);
-        byte[] bytes = baos.toByteArray();
-        return bytes;
+        return readAsBytes(in);
     }
+    
+    public static byte[] readAsBytes(InputStream in) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		transfer(in, baos);
+		byte[] bytes = baos.toByteArray();
+		return bytes;
+	}
+
     
     public static InputStream openFileOrZip(File directoryOrArchive, String relativePath) throws IOException {
         if (directoryOrArchive.isDirectory()) {
